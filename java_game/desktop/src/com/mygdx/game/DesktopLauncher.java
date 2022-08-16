@@ -9,7 +9,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("java_game_project");
-		new Lwjgl3Application(new MainGame(), config);
+		config.setTitle("MEU DEUS SOCORRO");
+		MainGame mainGame = new MainGame();
+		new Lwjgl3Application(mainGame, config);
 	}
 }
