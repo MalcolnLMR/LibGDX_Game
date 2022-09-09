@@ -1,11 +1,11 @@
-package com.mygdx.game;
+package com.javagame.dress_up;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MainGame extends ApplicationAdapter {
+public class MyDressUp extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	

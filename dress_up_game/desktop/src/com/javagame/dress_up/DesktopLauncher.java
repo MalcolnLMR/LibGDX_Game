@@ -1,16 +1,17 @@
-package com.mygdx.game;
+package com.javagame.dress_up;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.game.MainGame;
+import com.javagame.dress_up.MyDressUp;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("MEU DEUS SOCORRO");
-		MainGame mainGame = new MainGame();
-		new Lwjgl3Application(mainGame, config);
+		config.setWindowedMode(1600, 900);
+		config.setResizable(false);
+		config.setTitle("Dress_Up_Game");
+		new Lwjgl3Application(new MyDressUp(), config);
 	}
 }
