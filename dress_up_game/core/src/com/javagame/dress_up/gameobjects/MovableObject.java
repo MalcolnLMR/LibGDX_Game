@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.javagame.dress_up.MyDressUp;
 
@@ -13,7 +14,6 @@ public class MovableObject implements GameObject{
     private Rectangle collider;
     private boolean hold = false;
     public Texture sprite = null;
-
     private MyDressUp gameLoop;
 
     public MovableObject(MyDressUp gameLoop, float x, float y, float width, float height) {
@@ -54,14 +54,11 @@ public class MovableObject implements GameObject{
         Vector3 mouse = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         mouse = gameLoop.getCamera().unproject(mouse);
 
-        if (isHold()){
-            collider.setX(mouse.x);
-            collider.setY(mouse.y);
-        }
+        if (isHold()) collider.setCenter(mouse.x, mouse.y);
 
-        if(collider.contains(mouse.x, mouse.y) && Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) setHold(true);
+        if(collider.contains(mouse.x, mouse.y) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) setHold(true);
 
-        if(isHold() && !Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) setHold(false);
+        if(isHold() && !Gdx.input.isButtonPressed(Input.Buttons.LEFT)) setHold(false);
     }
 
     @Override
@@ -75,8 +72,9 @@ public class MovableObject implements GameObject{
 
     @Override
     public void dispose() {
-        sprite.dispose();
+
     }
+
 
     @Override
     public void setGameLoop(MyDressUp gameLoop) {
