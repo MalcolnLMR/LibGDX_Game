@@ -1,8 +1,8 @@
-package com.javagame.dress_up.gameobjects;
+package com.astradev.pong_the_game.player;
 
+import com.astradev.pong_the_game.Pong;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.javagame.dress_up.MyDressUp;
 
 public interface GameObject {
 
@@ -11,7 +11,7 @@ public interface GameObject {
     void tick();
     void render(SpriteBatch batch);
     void dispose();
-    void setGameLoop(MyDressUp gameLoop);
+    void setGameLoop(Pong gameLoop);
 
 
 }
