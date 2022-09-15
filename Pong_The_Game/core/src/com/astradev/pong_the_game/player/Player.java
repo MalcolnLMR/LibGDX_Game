@@ -14,13 +14,17 @@ public class Player implements GameObject{
     private int y;
     private Rectangle collider;
     private Pong pong;
-    private int speed = 5;
+    private float speed = 5;
     private Texture sprite;
     private ShapeRenderer rectShape;
     private int score;
 
     private int upKey = Input.Keys.UP;
     private int downKey = Input.Keys.DOWN;
+
+    private boolean goingDown = false;
+    private boolean goingUp = false;
+    private boolean stopped = true;
 
     public Player(Pong pong, int x, int y) {
         this.x = x;
@@ -47,10 +51,16 @@ public class Player implements GameObject{
     @Override
     public void tick() {
         if(Gdx.input.isKeyPressed(getUpKey()) && collider.getY() + collider.getHeight() < pong.getHeight()){
-            collider.setY(collider.getY() + speed);
+            setY(getY() + getSpeed());
+            setGoingUp();
+
         }
         if(Gdx.input.isKeyPressed(getDownKey()) && collider.getY() > 0){
-            collider.setY(collider.getY() - speed);
+            setY(getY() - getSpeed());
+            setGoingDown();
+        }
+        if(!Gdx.input.isKeyPressed(getDownKey()) && !Gdx.input.isKeyPressed(getUpKey())){
+            setStopped();
         }
     }
 
@@ -99,5 +109,79 @@ public class Player implements GameObject{
 
     public void gainScore(int score) {
         this.score += score;
+    }
+
+    public float getX() {
+        return collider.getX();
+    }
+
+    public void setX(float x) {
+        this.collider.setX(x);
+    }
+
+    public float getY() {
+        return collider.getY();
+    }
+
+    public void setY(float y) {
+        this.collider.setY(y);
+    }
+
+    public float getWidth() {
+        return collider.getWidth();
+    }
+
+    public void setWidth(float width) {
+        this.collider.setWidth(width);
+    }
+
+    public float getHeight() {
+        return collider.getHeight();
+    }
+
+    public void setHeight(float height) {
+        this.collider.setHeight(height);
+    }
+
+    public void setCollider(Rectangle collider) {
+        this.collider = collider;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public boolean isGoingDown() {
+        return goingDown;
+    }
+
+    public void setGoingDown() {
+        this.goingDown = true;
+        stopped = false;
+        goingUp = false;
+    }
+
+    public boolean isGoingUp() {
+        return goingUp;
+    }
+
+    public void setGoingUp() {
+        this.goingUp = true;
+        stopped = false;
+        goingDown = false;
+    }
+
+    public boolean isStopped() {
+        return stopped;
+    }
+
+    public void setStopped() {
+        this.stopped = true;
+        goingUp = false;
+        goingDown = false;
     }
 }

@@ -13,8 +13,8 @@ public class Ball implements GameObject{
     private float width;
     private float height;
     private Rectangle collider;
-    private ShapeRenderer rectShape;
-    private int speedX, speedY;
+    private final ShapeRenderer rectShape;
+    private float speedX, speedY;
     private Pong pong;
 
     public Ball(Pong pong, int x, int y) {
@@ -24,7 +24,7 @@ public class Ball implements GameObject{
         setY(y);
         setWidth(5);
         setHeight(5);
-        setSpeedX(2);
+        setSpeedX(4);
         setSpeedY(2);
         rectShape = new ShapeRenderer();
         rectShape.setAutoShapeType(true);
@@ -47,8 +47,17 @@ public class Ball implements GameObject{
         }
 
         for (Player player : pong.getPlayers().values()){
-            if (collider.contains(player.getCollider())){
-                setSpeedX(getSpeedX() * -1);
+            if (collider.overlaps(player.getCollider())){
+                if (player.isGoingUp()){
+                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedY((float) (getSpeedY() + 0.5));
+                } else if (player.isGoingDown()){
+                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedY((float) (getSpeedY() - 0.5));
+                } else if (player.isStopped()) {
+                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedY(getSpeedY() * -1);
+                }
                 player.gainScore(1);
             }
         }
@@ -71,12 +80,12 @@ public class Ball implements GameObject{
 
     @Override
     public void dispose() {
-
+        rectShape.dispose();
     }
 
     @Override
     public void setGameLoop(Pong gameLoop) {
-
+        this.pong = gameLoop;
     }
 
     public float getX() {
@@ -119,19 +128,19 @@ public class Ball implements GameObject{
         this.collider = collider;
     }
 
-    public int getSpeedX() {
+    public float getSpeedX() {
         return speedX;
     }
 
-    public void setSpeedX(int speedX) {
+    public void setSpeedX(float speedX) {
         this.speedX = speedX;
     }
 
-    public int getSpeedY() {
+    public float getSpeedY() {
         return speedY;
     }
 
-    public void setSpeedY(int speedY) {
+    public void setSpeedY(float speedY) {
         this.speedY = speedY;
     }
 }

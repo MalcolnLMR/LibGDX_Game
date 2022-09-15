@@ -1,5 +1,7 @@
 package com.astradev.pong_the_game;
 
+import com.astradev.pong_the_game.multiplayer.Client;
+import com.astradev.pong_the_game.multiplayer.Server;
 import com.astradev.pong_the_game.player.Ball;
 import com.astradev.pong_the_game.player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Pong extends ApplicationAdapter {
@@ -20,6 +23,9 @@ public class Pong extends ApplicationAdapter {
 	private int height = 900;
 	private double scale = 0.75;
 
+	private Server server;
+	private Client client;
+
 	
 	@Override
 	public void create () {
@@ -27,6 +33,20 @@ public class Pong extends ApplicationAdapter {
 		player = new Player(this, 10, 10);
 		players.put("player_1", player);
 		ball = new Ball(this, 500, 500);
+
+		server = new Server();
+		try {
+			server.start(6666);
+		} catch (IOException ignored) {
+
+		}
+		/*
+		client = new Client();
+		try {
+			client.startConnection();
+		} catch (IOException ignored) {
+
+		}*/
 	}
 
 	@Override
