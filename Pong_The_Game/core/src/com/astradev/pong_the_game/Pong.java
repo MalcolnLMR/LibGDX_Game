@@ -5,6 +5,7 @@ import com.astradev.pong_the_game.multiplayer.Server;
 import com.astradev.pong_the_game.player.Ball;
 import com.astradev.pong_the_game.player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 
 public class Pong extends ApplicationAdapter {
 	SpriteBatch batch;
-	Player player;
 
 	private HashMap<String, Player> players = new HashMap<>();
 	private Ball ball;
@@ -30,17 +30,19 @@ public class Pong extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		player = new Player(this, 10, 10);
-		players.put("player_1", player);
+		players.put("player_1", new Player(this, 10, 10));
+		players.put("player_2", new Player(this, getWidth() - 50, 10));
+		players.get("player_2").setUpKey(Input.Keys.W);
+		players.get("player_2").setDownKey(Input.Keys.S);
 		ball = new Ball(this, 500, 500);
 
+		/*
 		server = new Server();
 		try {
 			server.start(6666);
 		} catch (IOException ignored) {
 
 		}
-		/*
 		client = new Client();
 		try {
 			client.startConnection();
