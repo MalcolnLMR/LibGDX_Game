@@ -8,10 +8,11 @@ import com.astradev.pong_the_game.Pong;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+		Pong pong = new Pong();
 		config.setForegroundFPS(60);
 		config.setTitle("Pong_The_Game");
 		config.setResizable(false);
-		config.setWindowedMode(1600, 900);
-		new Lwjgl3Application(new Pong(), config);
+		config.setWindowedMode(pong.getWidth(), pong.getHeight());
+		new Lwjgl3Application(pong, config);
 	}
 }
