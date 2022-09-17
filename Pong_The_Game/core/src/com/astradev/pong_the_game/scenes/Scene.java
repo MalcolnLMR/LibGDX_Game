@@ -6,5 +6,6 @@ public interface Scene {
 
     void render(SpriteBatch batch);
     void tick();
+    void dispose();
 
 }

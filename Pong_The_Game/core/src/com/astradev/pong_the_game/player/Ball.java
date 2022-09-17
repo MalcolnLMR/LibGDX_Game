@@ -1,6 +1,8 @@
 package com.astradev.pong_the_game.player;
 
 import com.astradev.pong_the_game.Pong;
+import com.astradev.pong_the_game.scenes.GamePlay;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -16,6 +18,7 @@ public class Ball implements GameObject{
     private final ShapeRenderer rectShape;
     private float speedX, speedY;
     private Pong pong;
+    private GamePlay gamePlay;
 
     public Ball(Pong pong, int x, int y) {
         this.pong = pong;
@@ -46,7 +49,7 @@ public class Ball implements GameObject{
             setSpeedX(getSpeedX() * -1);
         }
 
-        for (Player player : pong.getPlayers().values()){
+        for (Player player : gamePlay.getPlayers().values()){
             if (collider.overlaps(player.getCollider())){
                 if (player.isGoingUp()){
                     setSpeedX((float) (getSpeedX() * -1 + 0.2));
@@ -142,5 +145,13 @@ public class Ball implements GameObject{
 
     public void setSpeedY(float speedY) {
         this.speedY = speedY;
+    }
+
+    public GamePlay getGamePlay() {
+        return gamePlay;
+    }
+
+    public void setGamePlay(GamePlay gamePlay) {
+        this.gamePlay = gamePlay;
     }
 }
