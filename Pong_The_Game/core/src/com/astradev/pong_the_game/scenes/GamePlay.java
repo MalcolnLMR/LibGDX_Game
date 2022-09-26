@@ -16,10 +16,9 @@ public class GamePlay implements Scene{
 
     public GamePlay(Pong pong) {
         players.put("player_1", new Player(pong, 10, 10));
-        players.put("player_2", new Player(pong, pong.getWidth() - 50, 10));
-
-        players.get("player_2").setUpKey(Input.Keys.W);
-        players.get("player_2").setDownKey(Input.Keys.S);
+        players.get("player_1").setUpKey(Input.Keys.W);
+        players.get("player_1").setDownKey(Input.Keys.S);
+        players.put("player_2", new Player(pong, Pong.getWidth() - 50, 10));
 
         ball = new Ball(pong, 500, 500);
         ball.setGamePlay(this);

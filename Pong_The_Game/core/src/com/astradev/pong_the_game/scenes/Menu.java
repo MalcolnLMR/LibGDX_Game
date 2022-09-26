@@ -1,7 +1,6 @@
 package com.astradev.pong_the_game.scenes;
 
 import com.astradev.pong_the_game.Pong;
-<<<<<<< Updated upstream
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
 import com.astradev.pong_the_game.ui.TextInput;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -23,10 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
->>>>>>> Stashed changes
 
 public class Menu implements Screen {
-
+/*
 <<<<<<< Updated upstream
     private String ip = "";
     private int port = 6666;
@@ -88,7 +85,7 @@ public class Menu implements Screen {
     @Override
     public void render(SpriteBatch batch) {
         ScreenUtils.clear(0,0,0,1);
-=======
+=======*/
     private Stage stage;
     private boolean show = false;
     private TextInput textInput;
@@ -122,20 +119,10 @@ public class Menu implements Screen {
 
     @Override
     public void show() {
->>>>>>> Stashed changes
 
-        drawButton();
     }
 
     @Override
-<<<<<<< Updated upstream
-    public void tick() {
-        Vector2 mouse = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-            if (rects.get("solo").contains(mouse.x, mouse.y)) pong.gameState = "game";
-        }
-=======
     public void render(float delta) {
 
         stage.act(delta);
@@ -160,7 +147,6 @@ public class Menu implements Screen {
 
     @Override
     public void hide() {
->>>>>>> Stashed changes
 
     }
 
