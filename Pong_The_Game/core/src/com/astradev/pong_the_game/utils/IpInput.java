@@ -1,11 +1,12 @@
 package com.astradev.pong_the_game.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
-public class IpInput {
+public class IpInput extends Actor {
 
     private TextField textField;
     private Skin skin;
@@ -23,5 +24,10 @@ public class IpInput {
 
     public void printText(){
         System.out.println(getText());
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
     }
 }

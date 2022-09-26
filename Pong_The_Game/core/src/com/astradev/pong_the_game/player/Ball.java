@@ -52,13 +52,13 @@ public class Ball implements GameObject{
         for (Player player : gamePlay.getPlayers().values()){
             if (collider.overlaps(player.getCollider())){
                 if (player.isGoingUp()){
-                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedX((float) (getSpeedX() * -1 + 0.5));
                     setSpeedY((float) (getSpeedY() + 0.5));
                 } else if (player.isGoingDown()){
-                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedX((float) (getSpeedX() * -1 + 0.5));
                     setSpeedY((float) (getSpeedY() - 0.5));
                 } else if (player.isStopped()) {
-                    setSpeedX((float) (getSpeedX() * -1 + 0.2));
+                    setSpeedX((float) (getSpeedX() * -1 + 0.8));
                     setSpeedY(getSpeedY() * -1);
                 }
                 player.gainScore(1);
