@@ -1,17 +1,11 @@
 package com.astradev.pong_the_game;
 
-import com.astradev.pong_the_game.multiplayer.Client;
-import com.astradev.pong_the_game.multiplayer.Server;
-import com.astradev.pong_the_game.player.Ball;
 import com.astradev.pong_the_game.player.Player;
 import com.astradev.pong_the_game.scenes.GamePlay;
 import com.astradev.pong_the_game.scenes.Menu;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
