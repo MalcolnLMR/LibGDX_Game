@@ -28,7 +28,8 @@ public class ClothesSystem {
 				"Skirt_1",
 				"Hair_1",
 				"Skirt_2",
-				"Hair_2"
+				"Hair_2",
+				"Hair_3"
 				);
 		
 		Skirts skirt_1 = new Skirts(game);
@@ -45,12 +46,16 @@ public class ClothesSystem {
 		Hairs hair_2 = new Hairs(game);	
 		hair_2.setClothe("Place_holders/Category_Icons/Hair.png");
 		
+		Hairs hair_3 = new Hairs(game);	
+		hair_3.setClothe("Place_holders/Category_Icons/Hair.png");
+		
 		
 		clothes = new HashMap<String, AbstractClothes>();
 		clothes.put("Skirt_1", skirt_1);
 		clothes.put("Hair_1", hair_1);		
 		clothes.put("Skirt_2", skirt_2);
-		clothes.put("Hair_2", hair_2);		
+		clothes.put("Hair_2", hair_2);	
+		clothes.put("Hair_3", hair_3);		
 	}
 	
 	public AbstractClothes getClothe(String key) {

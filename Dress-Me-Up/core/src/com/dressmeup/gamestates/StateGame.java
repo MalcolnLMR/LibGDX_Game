@@ -20,7 +20,7 @@ public class StateGame extends AbstractGameState {
 	private static final int CLOTHE_BUTTON_SIZE = 250;
 	private static final int CATEGORY_BUTTON_PADDING = 5;
 	private static final int CLOTHE_BUTTON_PADDING = 5;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	private List<Class<? extends AbstractClothes>> clothes;
 	private int actualPage = 0;
 	private Stage stage;
@@ -35,10 +35,10 @@ public class StateGame extends AbstractGameState {
 				Skirts.class,
 				Hairs.class
 				);				
-		setupProportions();
+		setupStage();
 	}	
 	
-	public void setupProportions() {
+	public void setupStage() {
 		stage.clear();
 		
 		Table clothesOrigin = new Table();
@@ -87,6 +87,12 @@ public class StateGame extends AbstractGameState {
 		stage.addActor(clothesOrigin);
 	}
 	
+	public void setupDialogBox() {
+		
+		
+		
+	}
+	
 	@Override
 	public void create() {
 		Gdx.input.setInputProcessor(stage);		
@@ -120,7 +126,7 @@ public class StateGame extends AbstractGameState {
 
 	public void setActualPage(int actualPage) {
 		this.actualPage = actualPage;
-		setupProportions();
+		setupStage();
 	}
 
 	public Table getClickableClothes() {

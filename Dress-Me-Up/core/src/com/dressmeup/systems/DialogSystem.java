@@ -2,7 +2,6 @@ package com.dressmeup.systems;
 
 import com.dressmeup.game.DressMeUp;
 
-// Controlar todo o sistema de diálogo, carregando salvando e td mais
 
 public class DialogSystem {
 

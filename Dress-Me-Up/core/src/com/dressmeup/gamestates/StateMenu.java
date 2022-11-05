@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.enums.GameStates;
 import com.dressmeup.game.DressMeUp;
+import com.dressmeup.utils.MenuButton;
 
 public class StateMenu extends AbstractGameState {
 	
@@ -23,31 +24,26 @@ public class StateMenu extends AbstractGameState {
 		generateMenu();
 	}
 	
-	private void generateMenu() {		
-		TextButton startBtn = new TextButton("New Game", game.getSkinManager().getSkin());
-		startBtn.setWidth(200);
-		startBtn.setHeight(100);
-		startBtn.setX(GameConfigs.getCenterWidth() - 100);
-		startBtn.setY(GameConfigs.getCenterHeight() + 75);
-		//startBtn.getLabel().setFontScale(2);
+	private void generateMenu() {
+		
+		MenuButton startBtn = new MenuButton("New Game", game.getSkinManager().getSkin(),
+				GameConfigs.getCenterWidth() - 100,
+				GameConfigs.getCenterHeight() + 75);
 		startBtn.addListener(new ClickListener() {
 			
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
 				game.getGameStateSystem().setActualState(GameStates.GAME);
-		}
+		}		
 			
 		});
-		stage.addActor(startBtn);		
 		
-
-		TextButton exitBtn = new TextButton("Exit", game.getSkinManager().getSkin());
-		exitBtn.setWidth(200);
-		exitBtn.setHeight(100);
-		exitBtn.setX(GameConfigs.getCenterWidth() - 100);
-		exitBtn.setY(GameConfigs.getCenterHeight() - 75);
-		//exitBtn.getLabel().setFontScale(2);
+		stage.addActor(startBtn);	
+		
+		MenuButton exitBtn = new MenuButton("Exit", game.getSkinManager().getSkin(),
+				GameConfigs.getCenterWidth() - 100,
+				GameConfigs.getCenterHeight() - 75);
 		exitBtn.addListener(new ClickListener() {			
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
