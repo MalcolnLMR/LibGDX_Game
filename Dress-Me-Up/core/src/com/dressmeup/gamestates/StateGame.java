@@ -4,14 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.entities.AbstractClothes;
+import com.dressmeup.entities.AbstractCustomers;
 import com.dressmeup.entities.clothes.Hairs;
 import com.dressmeup.entities.clothes.Skirts;
 import com.dressmeup.game.DressMeUp;
 import com.dressmeup.utils.ClotheButton;
+import com.dressmeup.utils.DialogButton;
 import com.dressmeup.utils.IconButton;
 
 public class StateGame extends AbstractGameState {
@@ -23,10 +27,13 @@ public class StateGame extends AbstractGameState {
 	private final boolean DEBUG = false;
 	private List<Class<? extends AbstractClothes>> clothes;
 	private int actualPage = 0;
+	private int actualDialog = 0;
+	private AbstractCustomers actualCustomer;
 	private Stage stage;
 	private Boolean active;	
 	private DressMeUp game;
 	private Table clickableClothes;
+	private DialogButton dialogBox;
 	
 	public StateGame(DressMeUp game) {		
 		this.game = game;
@@ -34,7 +41,9 @@ public class StateGame extends AbstractGameState {
 		clothes = Arrays.asList(
 				Skirts.class,
 				Hairs.class
-				);				
+				);
+		actualCustomer = game.getCustomerSystem().getRaquel();
+		setupDialogBox();
 		setupStage();
 	}	
 	
@@ -85,11 +94,21 @@ public class StateGame extends AbstractGameState {
 		
 		
 		stage.addActor(clothesOrigin);
+		stage.addActor(dialogBox);
 	}
 	
 	public void setupDialogBox() {
 		
+		dialogBox = new DialogButton(game.getSkinManager().getSkin(), actualCustomer);
+		dialogBox.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				nextDialog();
+			}
+		});
 		
+		stage.addActor(dialogBox);
 		
 	}
 	
@@ -136,5 +155,18 @@ public class StateGame extends AbstractGameState {
 	public void setClickableClothes(Table clickableClothes) {
 		this.clickableClothes = clickableClothes;
 	}
+
+	public int getActualDialog() {
+		return actualDialog;
+	}
+
+	public void nextDialog() {
+		if(actualDialog < actualCustomer.getMaxDialogs() - 1) {
+			this.actualDialog++;
+			dialogBox.setActualDialog(actualDialog);
+		}
+	}
+	
+	
 
 }

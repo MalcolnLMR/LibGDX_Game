@@ -1,1 +1,1 @@
-Começar fazendo GameLoop principal e como vai funcionar a alteração entre GameStates
+Mudar o Database.java para que ao invés de ler .txt, leia .yml

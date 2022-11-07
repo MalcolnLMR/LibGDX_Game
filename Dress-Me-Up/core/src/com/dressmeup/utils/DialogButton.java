@@ -2,26 +2,25 @@ package com.dressmeup.utils;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.dressmeup.entities.Customers;
+import com.dressmeup.entities.AbstractCustomers;
 
 public class DialogButton extends TextButton {
 	
-	private int actualDialog = 0;
-	private String name;
-	private Customers customer;
+	private AbstractCustomers customer;
 
-	public DialogButton(String text, Skin skin, Customers customer) {
-		super(text, skin);
-		this.setPosition(50, 200);
-		this.setSize(200, 100);
-		this.customer = customer;		
+	public DialogButton(Skin skin, AbstractCustomers customer) {
+		super("", skin);
+		this.setPosition(10, 10);
+		this.setSize(450, 200);
+		this.customer = customer;
+		setActualDialog(0);
 	}
 	
-	public int getActualDialog() {
-		return actualDialog;
+	public void setActualDialog(int index) {
+		this.setText(customer.getDialog(index));
 	}
 	
-	public Customers getCustomer() {
+	public AbstractCustomers getCustomer() {
 		return customer;
 	}
 

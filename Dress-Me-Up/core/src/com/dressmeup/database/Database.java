@@ -3,6 +3,7 @@ package com.dressmeup.database;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dressmeup.game.DressMeUp;
@@ -10,21 +11,22 @@ import com.dressmeup.game.DressMeUp;
 public class Database {
 	
 	private DressMeUp game;
-	private List<String> raquelDialog;
 	
 	public Database(DressMeUp game) {
 		this.game = game;
-		loadRaquel();
 	}
 	
-	public void loadRaquel() {
+	public List<String> loadFile(String path) {
+		
+		List<String> dialog = new ArrayList<String>();
+		
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\fatecscs\\Documents\\GitHub\\LibGDX_Game\\Dress-Me-Up\\assets\\characters\\Raquel.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(path));
 			
 			String nextDialog = null;
 			
 			while((nextDialog = reader.readLine()) != null) {
-				raquelDialog.add(nextDialog);
+				dialog.add(nextDialog);
 			}
 			
 			reader.close();
@@ -32,14 +34,11 @@ public class Database {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return dialog;
 	}
 	
 	public DressMeUp getGame() {
 		return game;
 	}
-	
-	public List<String> getRaquelDialog() {
-		return raquelDialog;
-	}
-
 }

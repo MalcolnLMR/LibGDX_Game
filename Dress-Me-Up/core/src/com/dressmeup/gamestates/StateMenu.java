@@ -3,7 +3,6 @@ package com.dressmeup.gamestates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.enums.GameStates;
@@ -24,33 +23,20 @@ public class StateMenu extends AbstractGameState {
 		generateMenu();
 	}
 	
-	private void generateMenu() {
-		
-		MenuButton startBtn = new MenuButton("New Game", game.getSkinManager().getSkin(),
+	private void generateMenu() {		
+		MenuButton startBtn = new MenuButton(
+				"New Game", game.getSkinManager().getSkin(),
 				GameConfigs.getCenterWidth() - 100,
 				GameConfigs.getCenterHeight() + 75);
-		startBtn.addListener(new ClickListener() {
-			
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				game.getGameStateSystem().setActualState(GameStates.GAME);
-		}		
-			
-		});
+		startBtn.addListener(getMenuChangeListener(GameStates.GAME));
 		
 		stage.addActor(startBtn);	
 		
-		MenuButton exitBtn = new MenuButton("Exit", game.getSkinManager().getSkin(),
+		MenuButton exitBtn = new MenuButton(
+				"Exit", game.getSkinManager().getSkin(),
 				GameConfigs.getCenterWidth() - 100,
 				GameConfigs.getCenterHeight() - 75);
-		exitBtn.addListener(new ClickListener() {			
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);		
-				game.getGameStateSystem().setActualState(GameStates.EXIT);		
-			}			
-		});
+		exitBtn.addListener(getMenuChangeListener(GameStates.EXIT));
 		stage.addActor(exitBtn);		
 	}
 	
@@ -74,6 +60,16 @@ public class StateMenu extends AbstractGameState {
 	@Override
 	public void dispose() {
 		
+	}
+	
+	public ClickListener getMenuChangeListener(final GameStates gamestate) {
+		return new ClickListener() {			
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);		
+				game.getGameStateSystem().setActualState(gamestate);		
+			}			
+		};
 	}
 
 	public GameStates getState() {

@@ -4,33 +4,33 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.dressmeup.database.Database;
 import com.dressmeup.systems.ClothesSystem;
-import com.dressmeup.systems.DialogSystem;
+import com.dressmeup.systems.CustomerSystem;
 import com.dressmeup.systems.GameStateSystem;
 import com.dressmeup.systems.SaveSystem;
 import com.dressmeup.systems.ScoreSystem;
 import com.dressmeup.utils.SkinsManager;
 
 public class DressMeUp extends ApplicationAdapter {
-	SpriteBatch batch;
 	
 	private GameStateSystem gameStateSystem;
 	private SaveSystem saveSystem;
 	private ScoreSystem scoreSystem;
-	private DialogSystem dialogSystem;
+	private CustomerSystem customerSystem;
 	private SkinsManager skinManager;
 	private ClothesSystem clothesSystem;
+	private Database database;
 	
 	@Override
 	public void create () {	
+		this.database = new Database(this);
 		this.skinManager = new SkinsManager(this);
 		this.clothesSystem = new ClothesSystem(this);	
-		this.gameStateSystem = new GameStateSystem(this);
+		this.customerSystem = new CustomerSystem(this);	
 		this.saveSystem = new SaveSystem(this);
 		this.scoreSystem = new ScoreSystem(this);
-		this.dialogSystem = new DialogSystem(this);	
-		
-		batch = new SpriteBatch();
+		this.gameStateSystem = new GameStateSystem(this);
 	}
 
 	@Override
@@ -56,8 +56,7 @@ public class DressMeUp extends ApplicationAdapter {
 				break;
 			default:				
 				break;
-		}
-		
+		}		
 	}
 	
 	@Override
@@ -77,8 +76,8 @@ public class DressMeUp extends ApplicationAdapter {
 		return scoreSystem;
 	}
 
-	public DialogSystem getDialogSystem() {
-		return dialogSystem;
+	public CustomerSystem getCustomerSystem() {
+		return customerSystem;
 	}
 
 	public SkinsManager getSkinManager() {
@@ -87,5 +86,9 @@ public class DressMeUp extends ApplicationAdapter {
 
 	public ClothesSystem getClothesSystem() {
 		return clothesSystem;
+	}
+
+	public Database getDatabase() {
+		return database;
 	}
 }
