@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.dressmeup.game.DressMeUp;
 
 // Classe base para criação de todos os tipos de roupas
 
@@ -16,6 +17,11 @@ public abstract class AbstractClothes {
 	private Texture clothe;
 	private String iconPath;
 	private String clothePath;	
+	protected DressMeUp game;
+	
+	public AbstractClothes(DressMeUp game) {
+		this.game = game;
+	}
 	
 	public Texture getIcon() {
 		return icon;
@@ -61,6 +67,7 @@ public abstract class AbstractClothes {
 	public void setClothe(String clothe) {
 		this.clothePath = clothe;
 		this.clothe = new Texture(Gdx.files.internal(clothe));
+		
 	}		
 
 	public String getClothePath() {

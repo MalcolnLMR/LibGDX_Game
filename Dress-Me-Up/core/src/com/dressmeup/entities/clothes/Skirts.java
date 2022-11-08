@@ -7,10 +7,12 @@ import com.dressmeup.game.DressMeUp;
 
 public class Skirts extends AbstractClothes{
 	
-	private DressMeUp game;
+	public static final int CLOTHE_INDEX = 7;
 	
 	public Skirts(DressMeUp game) {
-		this.game = game;		
+		super(game);
+		setClothe("Place_holders/Category_Icons/Skirt.png");
+		setIcon("Place_holders/Category_Icons/Skirt.png");
 	}
 
 	@Override
@@ -19,7 +21,7 @@ public class Skirts extends AbstractClothes{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
-				game.getGameStateSystem().getGame().setActualPage(0);;	
+				game.getGameStateSystem().getGame().setActualPage(CLOTHE_INDEX);;	
 			}
 		};
 	}

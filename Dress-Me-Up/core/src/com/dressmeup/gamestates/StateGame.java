@@ -11,8 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.entities.AbstractClothes;
 import com.dressmeup.entities.AbstractCustomers;
+import com.dressmeup.entities.clothes.Bracelet;
+import com.dressmeup.entities.clothes.Dress;
+import com.dressmeup.entities.clothes.EarRings;
 import com.dressmeup.entities.clothes.Hairs;
+import com.dressmeup.entities.clothes.Necklace;
+import com.dressmeup.entities.clothes.Pants;
+import com.dressmeup.entities.clothes.Shoes;
 import com.dressmeup.entities.clothes.Skirts;
+import com.dressmeup.entities.clothes.Tshirts;
 import com.dressmeup.game.DressMeUp;
 import com.dressmeup.utils.ClotheButton;
 import com.dressmeup.utils.DialogButton;
@@ -39,8 +46,15 @@ public class StateGame extends AbstractGameState {
 		this.game = game;
 		stage = new Stage();	
 		clothes = Arrays.asList(
+				Bracelet.class,
+				Dress.class,
+				EarRings.class,
+				Hairs.class,
+				Necklace.class,
+				Pants.class,
+				Shoes.class,
 				Skirts.class,
-				Hairs.class
+				Tshirts.class
 				);
 		actualCustomer = game.getCustomerSystem().getRaquel();
 		setupDialogBox();
@@ -86,7 +100,7 @@ public class StateGame extends AbstractGameState {
 			}
 		}
 		
-		clothesOrigin.add(clickableClothes).padTop(50);		
+		clothesOrigin.add(clickableClothes).padTop(50);
 		
 		clothesOrigin.setDebug(DEBUG);
 		categoryIcons.setDebug(DEBUG);

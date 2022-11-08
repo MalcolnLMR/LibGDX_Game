@@ -5,30 +5,29 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.entities.AbstractClothes;
 import com.dressmeup.game.DressMeUp;
 
-public class Hairs extends AbstractClothes {
-
-	public static final int CLOTHE_INDEX = 3;
+public class Necklace extends AbstractClothes {
 	
-	public Hairs(DressMeUp game) {
-		super(game);	
-		setClothe("Place_holders/Category_Icons/Hair.png");	
-		setIcon("Place_holders/Category_Icons/Hair.png");
+	public static final int CLOTHE_INDEX = 4;
+
+	public Necklace(DressMeUp game) {
+		super(game);
+		setClothe("Place_holders/Category_Icons/Necklace.png");
+		setIcon("Place_holders/Category_Icons/Necklace.png");
 	}
 
-
 	@Override
-	public ClickListener getIconClickListener() {		
+	public ClickListener getIconClickListener() {
 		return new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				super.clicked(event, x, y);
-				game.getGameStateSystem().getGame().setActualPage(CLOTHE_INDEX);;		
+				game.getGameStateSystem().getGame().setActualPage(CLOTHE_INDEX);
 			}
 		};
 	}
 
 	@Override
-	public ClickListener getClotheClickListener() {		
+	public ClickListener getClotheClickListener() {
 		return new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -36,6 +35,5 @@ public class Hairs extends AbstractClothes {
 			}
 		};
 	}
-	
 
 }
