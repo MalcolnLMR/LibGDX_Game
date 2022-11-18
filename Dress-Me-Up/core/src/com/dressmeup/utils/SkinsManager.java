@@ -1,13 +1,18 @@
 package com.dressmeup.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.dressmeup.game.DressMeUp;
 
 public class SkinsManager {
 	
 	private DressMeUp game;
 	private Skin skin;
+	private ImageButtonStyle clotheButton;
 	
 	public SkinsManager(DressMeUp game) {
 		
@@ -15,6 +20,13 @@ public class SkinsManager {
 		
 		skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));		
 		//generateButton();
+		loadButtons();
+	}
+	
+	private void loadButtons() {
+		clotheButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_deselect.png"))));
+		clotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_select.png"))));
+		skin.add("imgbtn_default",clotheButton);
 	}
 	
 //	private void generateButton() {
@@ -36,6 +48,10 @@ public class SkinsManager {
 //		buttonStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
 //		skin.add("btn_default", buttonStyle);
 //	}
+	
+	public ImageButtonStyle getClotheButton() {
+		return clotheButton;
+	}
 
 	public Skin getSkin() {
 		return skin;

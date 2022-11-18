@@ -92,7 +92,7 @@ public class StateGame extends AbstractGameState {
 		clickableClothes = new Table();
 				
 		for(String key : game.getClothesSystem().getClotheKeys()) {
-			ClotheButton button = new ClotheButton(game.getClothesSystem().getClothe(key), CLOTHE_BUTTON_SIZE);
+			ClotheButton button = new ClotheButton(game.getClothesSystem().getClothe(key), CLOTHE_BUTTON_SIZE, game);
 			if(button.getClothe().getClass().equals(clothes.get(actualPage)) ) {
 				clickableClothes.add(button)
 				.padRight(CLOTHE_BUTTON_PADDING)
