@@ -9,7 +9,7 @@ public class ClotheButton extends ImageButton {
 	private AbstractClothes clothe;
 
 	public ClotheButton(AbstractClothes clothe, float size, DressMeUp game) {	
-		super(game.getSkinManager().getSkin(), "imgbtn_default");
+		super(game.getSkinManager().getSkin(), "imgbtn_clothe");
 		this.clothe = clothe;
 		this.setSize(size, size);
 		this.addListener(clothe.getClotheClickListener());

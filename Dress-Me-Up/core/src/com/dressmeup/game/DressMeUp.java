@@ -30,6 +30,7 @@ public class DressMeUp extends ApplicationAdapter {
 		this.saveSystem = new SaveSystem(this);
 		this.scoreSystem = new ScoreSystem(this);
 		this.gameStateSystem = new GameStateSystem(this);
+		
 	}
 
 	@Override

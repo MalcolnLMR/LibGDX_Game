@@ -70,12 +70,9 @@ public class ClothesSystem {
 
 		clothes = new HashMap<String, AbstractClothes>();
 		
-		Bracelet bracelet_1 = new Bracelet(game); 
-		clothes.put("bracelet_1", bracelet_1);
-		Bracelet bracelet_2 = new Bracelet(game); 
-		clothes.put("bracelet_2", bracelet_2);
-		Bracelet bracelet_3 = new Bracelet(game); 
-		clothes.put("bracelet_3", bracelet_3);
+		Bracelet bracelet_1 = new Bracelet(game); clothes.put("bracelet_1", bracelet_1);
+		Bracelet bracelet_2 = new Bracelet(game); clothes.put("bracelet_2", bracelet_2);
+		Bracelet bracelet_3 = new Bracelet(game); clothes.put("bracelet_3", bracelet_3);
 				 
 		Dress dress_1 = new Dress(game); clothes.put("dress_1", dress_1);
 		Dress dress_2 = new Dress(game); clothes.put("dress_2", dress_2);

@@ -1,10 +1,14 @@
 package com.dressmeup.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.dressmeup.game.DressMeUp;
 
@@ -13,6 +17,9 @@ public class SkinsManager {
 	private DressMeUp game;
 	private Skin skin;
 	private ImageButtonStyle clotheButton;
+	private TextButtonStyle menuButton;
+	private ImageButtonStyle iconClotheButton;
+	
 	
 	public SkinsManager(DressMeUp game) {
 		
@@ -24,9 +31,27 @@ public class SkinsManager {
 	}
 	
 	private void loadButtons() {
+		clotheButton = new ImageButtonStyle();
 		clotheButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_deselect.png"))));
 		clotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_select.png"))));
-		skin.add("imgbtn_default",clotheButton);
+		skin.add("imgbtn_clothe", clotheButton);
+		
+		menuButton = new TextButtonStyle();
+		menuButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_normal.png"))));
+		menuButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_apertado.png"))));
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("PlayfairDisplay-Regular.ttf"));
+		FreeTypeFontParameter parameters = new FreeTypeFontParameter();
+		parameters.size = 20;
+		parameters.color = Color.BLACK;
+		menuButton.font = generator.generateFont(parameters);
+		generator.dispose();		
+		skin.add("txtbtn_menu", menuButton);
+		
+		iconClotheButton = new ImageButtonStyle();
+		iconClotheButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botao_redondo_atelie_normal.png"))));
+		iconClotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botao_redondo_atelie_apertado.png"))));
+		skin.add("imgbtn_icon", iconClotheButton);			
+		
 	}
 	
 //	private void generateButton() {

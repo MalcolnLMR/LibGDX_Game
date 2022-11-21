@@ -93,7 +93,4 @@ public abstract class AbstractClothes {
 	public abstract ClickListener getIconClickListener();
 
 	public abstract ClickListener getClotheClickListener();
-
-
-
 }

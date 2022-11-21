@@ -5,7 +5,7 @@ import com.dressmeup.game.DressMeUp;
 public class StatePause extends AbstractGameState {
 	
 	public StatePause(DressMeUp game) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
