@@ -32,7 +32,7 @@ public class StateGame extends AbstractGameState {
 	private static final int CLOTHE_BUTTON_SIZE = 250;
 	private static final int CATEGORY_BUTTON_PADDING = 5;
 	private static final int CLOTHE_BUTTON_PADDING = 5;
-	private final boolean DEBUG = true;
+	private final boolean DEBUG = false;
 	private List<Class<? extends AbstractClothes>> clothes;
 	private int actualPage = 0;
 	private int actualDialog = 0;
