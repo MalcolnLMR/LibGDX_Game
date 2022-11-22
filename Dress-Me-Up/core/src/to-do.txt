@@ -1,1 +1,7 @@
 Mudar o Database.java para que ao invés de ler .txt, leia .yml
+Colocar fundo
+Criar o saguão princial
+Colocar manquin na tela
+Colocar Roupas nos botões
+Colocar outros personagens
+Atribuir pontuação as roupas

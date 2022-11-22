@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.configs.GameConfigs;
@@ -42,6 +44,8 @@ public class StateGame extends AbstractGameState {
 	private DressMeUp game;
 	private Table clickableClothes;
 	private DialogButton dialogBox;
+	private ImageButton clientButton, clothesButton;
+	
 	
 	public StateGame(DressMeUp game) {		
 		this.game = game;
@@ -58,11 +62,13 @@ public class StateGame extends AbstractGameState {
 				Tshirts.class
 				);
 		actualCustomer = game.getCustomerSystem().getRaquel();
+		Texture background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie-01.png"));
 		setupDialogBox();
-		setupStage();
+		setupButtonChange();
+		setupClothesStage();
 	}	
 	
-	public void setupStage() {
+	public void setupClothesStage() {
 		stage.clear();
 		
 		Table clothesOrigin = new Table();
@@ -111,11 +117,16 @@ public class StateGame extends AbstractGameState {
 		
 		
 		stage.addActor(clothesOrigin);
-		stage.addActor(dialogBox);
+		stage.addActor(clientButton);
 	}
 	
-	public void setupDialogBox() {
-		
+	public void setupClientStage() {
+		stage.clear();
+		stage.addActor(dialogBox);
+		stage.addActor(clothesButton);
+	}
+	
+	public void setupDialogBox() {		
 		dialogBox = new DialogButton(game.getSkinManager().getSkin(), actualCustomer);
 		dialogBox.addListener(new ClickListener(Buttons.LEFT) {
 			@Override
@@ -136,6 +147,29 @@ public class StateGame extends AbstractGameState {
 		
 	}
 	
+	public void setupButtonChange() {
+		clientButton = new ImageButton(game.getSkinManager().getSkin(), "imgbtn_clothe");
+		clientButton.setPosition(10, 50);
+		clientButton.setSize(50, 50);
+		clientButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				setupClientStage();
+			}
+		});
+		clothesButton = new ImageButton(game.getSkinManager().getSkin(), "imgbtn_clothe");
+		clothesButton.setPosition(GameConfigs.getScaledWidth() - 110, 50);
+		clothesButton.setSize(50, 50);
+		clothesButton.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				super.clicked(event, x, y);
+				setupClothesStage();
+			}
+		});
+	}
+	
 	@Override
 	public void create() {
 		Gdx.input.setInputProcessor(stage);		
@@ -143,6 +177,10 @@ public class StateGame extends AbstractGameState {
 
 	@Override
 	public void render() {
+		stage.getBatch().begin();
+		stage.getBatch().draw(, x, y);
+		stage.getBatch().end();
+		
 		stage.draw();
 	}
 	
@@ -169,7 +207,7 @@ public class StateGame extends AbstractGameState {
 
 	public void setActualPage(int actualPage) {
 		this.actualPage = actualPage;
-		setupStage();
+		setupClothesStage();
 	}
 
 	public Table getClickableClothes() {
