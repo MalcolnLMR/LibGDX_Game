@@ -6,11 +6,14 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.entities.AbstractClothes;
 import com.dressmeup.entities.AbstractCustomers;
@@ -45,7 +48,8 @@ public class StateGame extends AbstractGameState {
 	private Table clickableClothes;
 	private DialogButton dialogBox;
 	private ImageButton clientButton, clothesButton;
-	
+	private Texture background;
+	private Drawable backgroundTable;
 	
 	public StateGame(DressMeUp game) {		
 		this.game = game;
@@ -62,7 +66,8 @@ public class StateGame extends AbstractGameState {
 				Tshirts.class
 				);
 		actualCustomer = game.getCustomerSystem().getRaquel();
-		Texture background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie-01.png"));
+		background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie-01.png"));
+		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("imagem-preta.jpg"))));
 		setupDialogBox();
 		setupButtonChange();
 		setupClothesStage();
@@ -90,8 +95,7 @@ public class StateGame extends AbstractGameState {
 			.padRight(CATEGORY_BUTTON_PADDING)
 			.left()
 			.size(CATEGORY_BUTTON_SIZE);
-		}		
-		
+		}
 		clothesOrigin.add(categoryIcons);
 		clothesOrigin.row();	
 		
@@ -108,8 +112,11 @@ public class StateGame extends AbstractGameState {
 				.size(CLOTHE_BUTTON_SIZE);				
 			}
 		}
-		
 		clothesOrigin.add(clickableClothes).padTop(50);
+		
+		clothesOrigin.setBackground(backgroundTable);
+		clothesOrigin.setColor(0, 0, 0, (float) 0.1);
+		clickableClothes.setColor(0, 0, 0, 1);
 		
 		clothesOrigin.setDebug(DEBUG);
 		categoryIcons.setDebug(DEBUG);
@@ -178,7 +185,7 @@ public class StateGame extends AbstractGameState {
 	@Override
 	public void render() {
 		stage.getBatch().begin();
-		stage.getBatch().draw(, x, y);
+		stage.getBatch().draw(background, 0, 0, GameConfigs.getScaledWidth(), GameConfigs.getScaledHeight());
 		stage.getBatch().end();
 		
 		stage.draw();
