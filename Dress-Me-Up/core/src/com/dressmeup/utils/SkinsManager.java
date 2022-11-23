@@ -28,6 +28,7 @@ public class SkinsManager {
 		skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));		
 		//generateButton();
 		loadButtons();
+		loadImages();
 	}
 	
 	private void loadButtons() {
@@ -52,6 +53,10 @@ public class SkinsManager {
 		iconClotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botao_redondo_atelie_apertado.png"))));
 		skin.add("imgbtn_icon", iconClotheButton);			
 		
+	}
+	
+	private void loadImages() {
+		skin.add("imgui_pause", new Texture(Gdx.files.internal("FABULOSO_ATELIE_JANELA_PAUSE.png")));
 	}
 	
 //	private void generateButton() {

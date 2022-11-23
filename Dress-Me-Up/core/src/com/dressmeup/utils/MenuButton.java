@@ -15,4 +15,8 @@ public class MenuButton extends TextButton {
 		this.setX(x);
 		this.setY(y);
 	}
+	
+	public MenuButton(String text, Skin skin) {
+		super(text, skin, "txtbtn_menu");	
+	}
 }

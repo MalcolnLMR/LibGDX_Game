@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -26,6 +29,7 @@ import com.dressmeup.entities.clothes.Pants;
 import com.dressmeup.entities.clothes.Shoes;
 import com.dressmeup.entities.clothes.Skirts;
 import com.dressmeup.entities.clothes.Tshirts;
+import com.dressmeup.enums.GameStates;
 import com.dressmeup.game.DressMeUp;
 import com.dressmeup.utils.ClotheButton;
 import com.dressmeup.utils.DialogButton;
@@ -70,7 +74,7 @@ public class StateGame extends AbstractGameState {
 		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("tela_preta_semitransparente.png"))));
 		setupDialogBox();
 		setupButtonChange();
-		setupClothesStage();
+		setupClothesStage();		
 	}	
 	
 	public void setupClothesStage() {
@@ -194,6 +198,9 @@ public class StateGame extends AbstractGameState {
 	@Override
 	public void tick() {	
 		stage.act();
+		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+			game.getGameStateSystem().setActualState(GameStates.PAUSE);
+		}
 	}
 	
 	@Override
