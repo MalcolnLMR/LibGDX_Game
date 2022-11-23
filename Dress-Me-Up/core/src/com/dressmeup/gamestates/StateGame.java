@@ -67,7 +67,7 @@ public class StateGame extends AbstractGameState {
 				);
 		actualCustomer = game.getCustomerSystem().getRaquel();
 		background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie-01.png"));
-		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("imagem-preta.jpg"))));
+		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("tela_preta_semitransparente.png"))));
 		setupDialogBox();
 		setupButtonChange();
 		setupClothesStage();
@@ -115,7 +115,7 @@ public class StateGame extends AbstractGameState {
 		clothesOrigin.add(clickableClothes).padTop(50);
 		
 		clothesOrigin.setBackground(backgroundTable);
-		clothesOrigin.setColor(0, 0, 0, (float) 0.1);
+		clothesOrigin.setColor(0, 0, 0, (float) 1);
 		clickableClothes.setColor(0, 0, 0, 1);
 		
 		clothesOrigin.setDebug(DEBUG);
