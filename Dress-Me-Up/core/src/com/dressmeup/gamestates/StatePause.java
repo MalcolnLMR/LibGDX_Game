@@ -1,6 +1,7 @@
 package com.dressmeup.gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,24 +18,28 @@ public class StatePause extends AbstractGameState {
 	private Stage stage;
 	private MenuButton menuButton, exitButton;
 	private Table table;
+	private Texture filter;
 	
 	public StatePause(DressMeUp game) {
 		this.game = game;
 		stage = new Stage();
 		table = new Table(game.getSkinManager().getSkin());
+		filter = new Texture(Gdx.files.internal("bg_tp.png"));
 		setupButtons();
 		table.setDebug(DEBUG);
 		table.setSize(GameConfigs.getScaledWidth(), GameConfigs.getScaledHeight());		
 		table.setBackground("imgui_pause");
-		table.add(menuButton);
 		table.row();
-		table.add(exitButton);
+		table.add(menuButton).size(menuButton.getWidth(), menuButton.getHeight()).left();
+		table.row();
+		table.add(exitButton).size(exitButton.getWidth(), exitButton.getHeight()).left().padLeft(50);
 		stage.addActor(table);
 	}
 	
 	public void setupButtons() {
+		int mult = 15;
 		menuButton = new MenuButton("Resume", game.getSkinManager().getSkin());
-		menuButton.setSize(16 * 2, 9 * 2);
+		menuButton.setSize(16 * mult, 9 * mult);
 		menuButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {			
@@ -43,7 +48,7 @@ public class StatePause extends AbstractGameState {
 			}
 		});
 		exitButton = new MenuButton("Exit", game.getSkinManager().getSkin());
-		exitButton.setSize(16 * 2, 9 * 2);
+		exitButton.setSize(16 * mult, 9 * mult);
 		exitButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {			
@@ -60,6 +65,9 @@ public class StatePause extends AbstractGameState {
 
 	@Override
 	public void render() {
+		stage.getBatch().begin();
+		stage.getBatch().draw(filter, 0, 0, GameConfigs.getScaledWidth(), GameConfigs.getScaledHeight());		
+		stage.getBatch().end();
 		stage.draw();
 	}
 	

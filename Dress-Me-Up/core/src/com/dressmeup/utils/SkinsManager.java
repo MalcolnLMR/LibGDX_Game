@@ -19,6 +19,18 @@ public class SkinsManager {
 	private ImageButtonStyle clotheButton;
 	private TextButtonStyle menuButton;
 	private ImageButtonStyle iconClotheButton;
+	private TextButtonStyle dialogButtonPlayer, dialogButtonCustomer;
+	private String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+							  + "abcdefghijklmnopqrstuvwxyz"
+							  + "¡¢£¤¥¦§¨©ª«¬­"
+							  + "®¯°±²³´µ¶∙¸¹º"
+							  + "»¼½¾¿ÀÁÂÃÄÅÆÇ"
+							  + "ÈÉÊËÌÍÎÏÐÑÒÓÔ"
+							  + "ÕÖ×ØÙÚÛÜÝÞßàá"
+							  + "âãäåæçèéêëìíî"
+							  + "ïðñòóôõö÷øùúû"
+							  + "üýþÿ"
+							  + ".,:;_¡!¿?\\\"'+-*/()[]={}";
 	
 	
 	public SkinsManager(DressMeUp game) {
@@ -32,6 +44,19 @@ public class SkinsManager {
 	}
 	
 	private void loadButtons() {
+		FreeTypeFontGenerator generator_menu = new FreeTypeFontGenerator(Gdx.files.internal("text/josephsophia.ttf"));
+		FreeTypeFontParameter parameters_menu = new FreeTypeFontParameter();
+		parameters_menu.size = 25;
+		parameters_menu.color = Color.BLACK;
+		//parameters_menu.characters = characters;		
+		
+		FreeTypeFontGenerator generator_dialog = new FreeTypeFontGenerator(Gdx.files.internal("text/OpenSans-Light.ttf"));
+		System.out.println(generator_dialog.hasGlyph(233)); 
+		FreeTypeFontParameter parameters_dialog = new FreeTypeFontParameter();		
+		parameters_dialog.size = 20;
+		parameters_dialog.color = Color.BLACK;
+		parameters_dialog.characters = characters;
+		
 		clotheButton = new ImageButtonStyle();
 		clotheButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_deselect.png"))));
 		clotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("Icon_cloth_select.png"))));
@@ -39,45 +64,38 @@ public class SkinsManager {
 		
 		menuButton = new TextButtonStyle();
 		menuButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_normal.png"))));
-		menuButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_apertado.png"))));
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("PlayfairDisplay-Regular.ttf"));
-		FreeTypeFontParameter parameters = new FreeTypeFontParameter();
-		parameters.size = 20;
-		parameters.color = Color.BLACK;
-		menuButton.font = generator.generateFont(parameters);
-		generator.dispose();		
+		menuButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_apertado.png"))));		
+		menuButton.font = generator_menu.generateFont(parameters_menu);	
 		skin.add("txtbtn_menu", menuButton);
 		
 		iconClotheButton = new ImageButtonStyle();
 		iconClotheButton.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botao_redondo_atelie_normal.png"))));
 		iconClotheButton.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botao_redondo_atelie_apertado.png"))));
 		skin.add("imgbtn_icon", iconClotheButton);			
+
+		dialogButtonPlayer = new TextButtonStyle();
+		dialogButtonPlayer.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_normal.png"))));
+		dialogButtonPlayer.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_normal.png"))));
+		dialogButtonPlayer.font = generator_dialog.generateFont(parameters_dialog);	
+		skin.add("txtbtn_dialogP", dialogButtonPlayer);
 		
+		dialogButtonCustomer = new TextButtonStyle();
+		dialogButtonCustomer.up = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_apertado.png"))));
+		dialogButtonCustomer.down = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("botoes_atelie_apertado.png"))));
+		//FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("text/josephsophia.ttf"));
+		dialogButtonCustomer.font = generator_dialog.generateFont(parameters_dialog);
+		skin.add("txtbtn_dialogC", dialogButtonCustomer);
+		
+
+		generator_dialog.dispose();
+		generator_menu.dispose();
 	}
 	
 	private void loadImages() {
 		skin.add("imgui_pause", new Texture(Gdx.files.internal("FABULOSO_ATELIE_JANELA_PAUSE.png")));
+		skin.add("imgui_btnbgup", new Texture(Gdx.files.internal("botoes_atelie_normal.png")));
+		skin.add("imgui_btnbgdown", new Texture(Gdx.files.internal("botoes_atelie_apertado.png")));
 	}
-	
-//	private void generateButton() {
-//		
-//		// Generate a 1x1 white texture and store it in the skin named "white".
-//		Pixmap pixmap = new Pixmap(100, 100, Format.RGBA8888);
-//		pixmap.setColor(Color.WHITE);
-//		pixmap.fill();
-//		skin.add("white", new Texture(pixmap));
-//
-//		// Store the default libGDX font under the name "default".
-//		skin.add("default", new BitmapFont());
-//		
-//		//this.skin = new Skin(Gdx.files.internal("skin" + File.separator + "clean-crispy-ui.json"));
-//		ButtonStyle buttonStyle = new ButtonStyle();
-//		buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-//		buttonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-//		buttonStyle.checked = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-//		buttonStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
-//		skin.add("btn_default", buttonStyle);
-//	}
 	
 	public ImageButtonStyle getClotheButton() {
 		return clotheButton;

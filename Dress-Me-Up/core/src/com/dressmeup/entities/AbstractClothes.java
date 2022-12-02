@@ -3,7 +3,9 @@ package com.dressmeup.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -18,13 +20,46 @@ public abstract class AbstractClothes {
 	private String iconPath;
 	private String clothePath;	
 	protected DressMeUp game;
+	protected String ref;
 	
 	public AbstractClothes(DressMeUp game) {
 		this.game = game;
+		ref = "imgbtn_clothe";
 	}
 	
 	public Texture getIcon() {
 		return icon;
+	}
+	
+	public void setClotheBtnTexture() {
+		Texture splashTexture = new Texture(getClothePath()); // Remember to dispose
+		splashTexture.getTextureData().prepare(); // The api-doc says this is needed
+		
+		Pixmap splashpixmap = splashTexture.getTextureData().consumePixmap(); // Strange name, but gives the pixmap of the texture. Remember to dispose this also
+		Pixmap pixmap = new Pixmap(splashTexture.getWidth(), splashTexture.getHeight(), Format.RGBA8888); // Remember to dispose
+		
+
+		ImageButtonStyle btnStyle = new ImageButtonStyle(game.getSkinManager().getSkin().get("imgbtn_clothe", ImageButtonStyle.class));
+		
+		Texture splashTex = (Texture) btnStyle.up;
+		splashTex.getTextureData().prepare();
+		Pixmap splashPix = splashTex.getTextureData().consumePixmap();
+		
+		pixmap.drawPixmap(splashPix, 0, 0);
+		pixmap.drawPixmap(splashpixmap, 0, 0);
+		//this.btnup = new Texture(pixmap); // Not sure if needed, but may be needed to get disposed as well when it's no longer needed
+		btnStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+		btnStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+		
+		
+		game.getSkinManager().getSkin().add(ref, btnStyle);
+		
+		// These are not needed anymore
+		splashTex.dispose();
+		splashPix.dispose();
+		pixmap.dispose();
+		splashpixmap.dispose();
+		splashTexture.dispose();
 	}
 	
 	public Texture getScaledIcon(int size) {
@@ -90,7 +125,13 @@ public abstract class AbstractClothes {
 		return new TextureRegionDrawable(new TextureRegion(getScaledClothe(size)));
 	}
 	
+	public String getRef() {
+		return ref;
+	}
+	
 	public abstract ClickListener getIconClickListener();
 
 	public abstract ClickListener getClotheClickListener();
+	
+	
 }

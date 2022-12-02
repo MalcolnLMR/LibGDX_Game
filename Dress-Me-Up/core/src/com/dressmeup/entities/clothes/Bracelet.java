@@ -10,10 +10,13 @@ public class Bracelet extends AbstractClothes {
 	public static final int CLOTHE_INDEX = 0;
 
 	public Bracelet(DressMeUp game) {
-		super(game);
+		super(game);		
 		setClothe("Place_holders/Category_Icons/Bracelet.png");
 		setIcon("Place_holders/Category_Icons/Bracelet.png");
-	}
+		ref = "imgbtn_bracelet";		
+		setClotheBtnTexture();
+	}	
+
 
 	@Override
 	public ClickListener getIconClickListener() {

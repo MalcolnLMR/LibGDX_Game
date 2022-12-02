@@ -11,8 +11,10 @@ public class Skirts extends AbstractClothes{
 	
 	public Skirts(DressMeUp game) {
 		super(game);
-		setClothe("Place_holders/Category_Icons/Skirt.png");
-		setIcon("Place_holders/Category_Icons/Skirt.png");
+		setClothe("Roupas/saia_contorno_1.png");
+		setIcon("Roupas/saia_cor_1.png");
+		//ref = "imgbtn_skirt";
+		//setClotheBtnTexture();
 	}
 
 	@Override

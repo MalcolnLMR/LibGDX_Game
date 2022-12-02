@@ -18,6 +18,7 @@ public abstract class AbstractCustomers {
 	}
 		
 	public abstract String getDialog(int index);
+	public abstract String getDialogFormated(int index);
 	
 	protected void loadDialogs(String fileName) {
 		dialogs = game.getDatabase().loadFile(Gdx.files.getLocalStoragePath() + "characters" + File.separator + fileName);	

@@ -11,8 +11,10 @@ public class Necklace extends AbstractClothes {
 
 	public Necklace(DressMeUp game) {
 		super(game);
-		setClothe("Place_holders/Category_Icons/Necklace.png");
-		setIcon("Place_holders/Category_Icons/Necklace.png");
+		setClothe("Roupas/colar_contorno.png");
+		setIcon("Roupas/colar_cor.png");
+		//ref = "imgbtn_necklace";		
+		//setClotheBtnTexture();
 	}
 
 	@Override

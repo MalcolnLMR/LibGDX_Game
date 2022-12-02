@@ -15,5 +15,9 @@ public class Linda extends AbstractCustomers {
 	public String getDialog(int index) {
 		return dialogs.get(index);
 	}
-
+	
+	@Override
+	public String getDialogFormated(int index) {
+		return dialogs.get(index).replace("A: ", "").replace("L: ", "");
+	}
 }

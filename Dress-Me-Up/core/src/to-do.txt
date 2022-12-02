@@ -1,5 +1,12 @@
-Mudar o Database.java para que ao invés de ler .txt, leia .yml
-Colocar fundo
+AGORA
+1. Dialogos com npc completos.
+2. Botões aparecendo na roupa e suas funções
+3. Manquin
+4. Finalizar uma run
+
+
+
+
 Criar o saguão princial
 Colocar manquin na tela
 Colocar Roupas nos botões

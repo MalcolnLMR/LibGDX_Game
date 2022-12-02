@@ -4,22 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.entities.AbstractClothes;
-import com.dressmeup.entities.AbstractCustomers;
 import com.dressmeup.entities.clothes.Bracelet;
 import com.dressmeup.entities.clothes.Dress;
 import com.dressmeup.entities.clothes.EarRings;
@@ -44,8 +41,8 @@ public class StateGame extends AbstractGameState {
 	private final boolean DEBUG = false;
 	private List<Class<? extends AbstractClothes>> clothes;
 	private int actualPage = 0;
-	private int actualDialog = 0;
-	private AbstractCustomers actualCustomer;
+	//private int actualDialog = 0;
+	//private AbstractCustomers actualCustomer;
 	private Stage stage;
 	private Boolean active;	
 	private DressMeUp game;
@@ -69,8 +66,8 @@ public class StateGame extends AbstractGameState {
 				Skirts.class,
 				Tshirts.class
 				);
-		actualCustomer = game.getCustomerSystem().getRaquel();
-		background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie-01.png"));
+		game.getDialogSystem().setActualCustomer(game.getDialogSystem().getRaquel());
+		background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie_aberto.png"));
 		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("tela_preta_semitransparente.png"))));
 		setupDialogBox();
 		setupButtonChange();
@@ -138,24 +135,18 @@ public class StateGame extends AbstractGameState {
 	}
 	
 	public void setupDialogBox() {		
-		dialogBox = new DialogButton(game.getSkinManager().getSkin(), actualCustomer);
-		dialogBox.addListener(new ClickListener(Buttons.LEFT) {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				nextDialog();
-			}
-		});
-		dialogBox.addListener(new ClickListener(Buttons.RIGHT) {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);				
-				previousDialog();
-			}
-		});
-		
+		dialogBox = game.getDialogSystem().getDialogButtonCustomer();		
+		dialogBox.setCustomer(game.getDialogSystem().getActualCustomer());
 		stage.addActor(dialogBox);
 		
+	}
+	
+	public void actualizeDialogBox() {
+		if(game.getDialogSystem().isPlayerTalking()) {
+			dialogBox.setStyle(game.getSkinManager().getSkin().get("txtbtn_dialogP", TextButtonStyle.class));	
+			return;
+		}
+		dialogBox.setStyle(game.getSkinManager().getSkin().get("txtbtn_dialogC", TextButtonStyle.class));		
 	}
 	
 	public void setupButtonChange() {
@@ -201,6 +192,11 @@ public class StateGame extends AbstractGameState {
 		if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
 			game.getGameStateSystem().setActualState(GameStates.PAUSE);
 		}
+		if (game.getDialogSystem().isDialogChanged()) {
+			dialogBox.setActualDialog(game.getDialogSystem().getActualDialog());
+			actualizeDialogBox();
+			game.getDialogSystem().setDialogChanged(false);
+		}
 	}
 	
 	@Override
@@ -231,25 +227,4 @@ public class StateGame extends AbstractGameState {
 	public void setClickableClothes(Table clickableClothes) {
 		this.clickableClothes = clickableClothes;
 	}
-
-	public int getActualDialog() {
-		return actualDialog;
-	}
-
-	public void nextDialog() {
-		if(actualDialog < actualCustomer.getMaxDialogs() - 1) {
-			this.actualDialog++;
-			dialogBox.setActualDialog(actualDialog);
-		}
-	}
-	
-	public void previousDialog() {
-		if(actualDialog > 0) {
-			this.actualDialog--;
-			dialogBox.setActualDialog(actualDialog);
-		}
-	}
-	
-	
-
 }
