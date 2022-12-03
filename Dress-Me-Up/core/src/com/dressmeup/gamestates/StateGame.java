@@ -17,10 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.dressmeup.configs.GameConfigs;
 import com.dressmeup.entities.AbstractClothes;
-import com.dressmeup.entities.clothes.Bracelet;
+import com.dressmeup.entities.Mannequin;
+import com.dressmeup.entities.clothes.Eyes;
+import com.dressmeup.entities.clothes.HairBack;
 import com.dressmeup.entities.clothes.Dress;
 import com.dressmeup.entities.clothes.EarRings;
-import com.dressmeup.entities.clothes.Hairs;
+import com.dressmeup.entities.clothes.HairFront;
 import com.dressmeup.entities.clothes.Necklace;
 import com.dressmeup.entities.clothes.Pants;
 import com.dressmeup.entities.clothes.Shoes;
@@ -41,8 +43,6 @@ public class StateGame extends AbstractGameState {
 	private final boolean DEBUG = false;
 	private List<Class<? extends AbstractClothes>> clothes;
 	private int actualPage = 0;
-	//private int actualDialog = 0;
-	//private AbstractCustomers actualCustomer;
 	private Stage stage;
 	private Boolean active;	
 	private DressMeUp game;
@@ -50,25 +50,28 @@ public class StateGame extends AbstractGameState {
 	private DialogButton dialogBox;
 	private ImageButton clientButton, clothesButton;
 	private Texture background;
+	private Mannequin mannequin;
 	private Drawable backgroundTable;
 	
 	public StateGame(DressMeUp game) {		
 		this.game = game;
 		stage = new Stage();	
 		clothes = Arrays.asList(
-				Bracelet.class,
-				Dress.class,
-				EarRings.class,
-				Hairs.class,
+				Tshirts.class,
 				Necklace.class,
+				Skirts.class,
+				EarRings.class,
 				Pants.class,
 				Shoes.class,
-				Skirts.class,
-				Tshirts.class
+				Dress.class,
+				Eyes.class,
+				HairFront.class,
+				HairBack.class
 				);
 		game.getDialogSystem().setActualCustomer(game.getDialogSystem().getRaquel());
 		background = new Texture(Gdx.files.internal("cenario_externo_fabuloso_atelie_aberto.png"));
 		backgroundTable = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("tela_preta_semitransparente.png"))));
+		mannequin = new Mannequin(game);
 		setupDialogBox();
 		setupButtonChange();
 		setupClothesStage();		
@@ -79,7 +82,6 @@ public class StateGame extends AbstractGameState {
 		
 		Table clothesOrigin = new Table();
 		
-		//clothesOrigin.setY(GameConfigs.getScaledHeight() - CATEGORY_BUTTON_SIZE/2);
 		clothesOrigin.setY(0);
 		clothesOrigin.setX((float) (GameConfigs.getScaledWidth() * 0.3));
 		clothesOrigin.setWidth((float) (GameConfigs.getScaledWidth() * 0.7));
@@ -104,9 +106,9 @@ public class StateGame extends AbstractGameState {
 		
 		clickableClothes = new Table();
 				
-		for(String key : game.getClothesSystem().getClotheKeys()) {
+		for(String key : game.getClothesSystem().getClothes().keySet()) {
 			ClotheButton button = new ClotheButton(game.getClothesSystem().getClothe(key), CLOTHE_BUTTON_SIZE, game);
-			if(button.getClothe().getClass().equals(clothes.get(actualPage)) ) {
+			if(button.getClothe().getNewClotheIndex() == actualPage) {
 				clickableClothes.add(button)
 				.padRight(CLOTHE_BUTTON_PADDING)
 				.left()
@@ -181,6 +183,8 @@ public class StateGame extends AbstractGameState {
 	public void render() {
 		stage.getBatch().begin();
 		stage.getBatch().draw(background, 0, 0, GameConfigs.getScaledWidth(), GameConfigs.getScaledHeight());
+		//stage.getBatch().draw(mannequin.getMannequin(), 0, GameConfigs.getCenterHeight());
+		mannequin.draw(stage.getBatch());
 		stage.getBatch().end();
 		
 		stage.draw();
@@ -227,4 +231,9 @@ public class StateGame extends AbstractGameState {
 	public void setClickableClothes(Table clickableClothes) {
 		this.clickableClothes = clickableClothes;
 	}
+	
+	public Mannequin getMannequin() {
+		return mannequin;
+	}
+	
 }

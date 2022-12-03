@@ -1,39 +1,33 @@
 package com.dressmeup.entities.clothes;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.entities.AbstractClothes;
 import com.dressmeup.game.DressMeUp;
 
 public class EarRings extends AbstractClothes {
 	
-	public static final int CLOTHE_INDEX = 2;
+	public static final int NEW_CLOTHE_INDEX = 3;
 
 	public EarRings(DressMeUp game) {
 		super(game);
-		setClothe("Place_holders/Category_Icons/EarRings.png");
-		setIcon("Place_holders/Category_Icons/EarRings.png");
+		ref = "imgbtn_shirt";
+	}
+	
+	public EarRings(DressMeUp game, String clothePath, String iconPath, String ref) {
+		super(game, clothePath, iconPath, ref, NEW_CLOTHE_INDEX);
+		setClothe(clothePath);
+		setIcon(iconPath);
+		setRef(ref);
+		setup();
+	}
+	
+	@Override
+	public void setup() {
+		super.setup();
 	}
 
 	@Override
-	public ClickListener getIconClickListener() {
-		return new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				game.getGameStateSystem().getGame().setActualPage(CLOTHE_INDEX);
-			}
-		};
-	}
-
-	@Override
-	public ClickListener getClotheClickListener() {
-		return new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-			}
-		};
+	public AbstractClothes getSelf() {
+		return this;
 	}
 
 }

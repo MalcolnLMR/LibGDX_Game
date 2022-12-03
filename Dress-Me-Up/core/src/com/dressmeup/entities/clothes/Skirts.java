@@ -1,41 +1,38 @@
 package com.dressmeup.entities.clothes;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.dressmeup.entities.AbstractClothes;
 import com.dressmeup.game.DressMeUp;
 
 public class Skirts extends AbstractClothes{
 	
-	public static final int CLOTHE_INDEX = 7;
+	public static final int NEW_CLOTHE_INDEX = 2;
 	
 	public Skirts(DressMeUp game) {
 		super(game);
-		setClothe("Roupas/saia_contorno_1.png");
-		setIcon("Roupas/saia_cor_1.png");
-		//ref = "imgbtn_skirt";
+		//setClothe("Roupas/saia.png");
+		//setIcon("Roupas/saia.png");
+		ref = "imgbtn_skirt";
 		//setClotheBtnTexture();
+		//setScaledClothe();
+		//itSelf = this;
 	}
-
+	
+	public Skirts(DressMeUp game, String clothePath, String iconPath, String ref) {
+		super(game, clothePath, iconPath, ref, NEW_CLOTHE_INDEX);
+		setClothe(clothePath);
+		setIcon(iconPath);
+		setRef(ref);
+		setup();
+	}
+	
 	@Override
-	public ClickListener getIconClickListener() {		
-		return new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-				game.getGameStateSystem().getGame().setActualPage(CLOTHE_INDEX);;	
-			}
-		};
+	public void setup() {
+		// TODO Auto-generated method stub
+		super.setup();
 	}
-
+	
 	@Override
-	public ClickListener getClotheClickListener() {		
-		return new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				super.clicked(event, x, y);
-			}
-		};
-	}
-
+	public AbstractClothes getSelf() {
+		return this;
+	}	
 }

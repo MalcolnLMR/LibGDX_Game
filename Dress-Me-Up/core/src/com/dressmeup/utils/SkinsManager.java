@@ -51,7 +51,6 @@ public class SkinsManager {
 		//parameters_menu.characters = characters;		
 		
 		FreeTypeFontGenerator generator_dialog = new FreeTypeFontGenerator(Gdx.files.internal("text/OpenSans-Light.ttf"));
-		System.out.println(generator_dialog.hasGlyph(233)); 
 		FreeTypeFontParameter parameters_dialog = new FreeTypeFontParameter();		
 		parameters_dialog.size = 20;
 		parameters_dialog.color = Color.BLACK;
@@ -93,8 +92,8 @@ public class SkinsManager {
 	
 	private void loadImages() {
 		skin.add("imgui_pause", new Texture(Gdx.files.internal("FABULOSO_ATELIE_JANELA_PAUSE.png")));
-		skin.add("imgui_btnbgup", new Texture(Gdx.files.internal("botoes_atelie_normal.png")));
-		skin.add("imgui_btnbgdown", new Texture(Gdx.files.internal("botoes_atelie_apertado.png")));
+		skin.add("imgui_btnbgup", new Texture(Gdx.files.internal("Icon_cloth_deselect.png")));
+		skin.add("imgui_btnbgdown", new Texture(Gdx.files.internal("Icon_cloth_select.png")));
 	}
 	
 	public ImageButtonStyle getClotheButton() {
